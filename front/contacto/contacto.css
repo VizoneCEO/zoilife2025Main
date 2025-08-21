@@ -1,0 +1,80 @@
+/* Sección de contacto */
+.contact-section {
+    padding: 40px 0;
+}
+
+/* Banner de imagen */
+.contact-banner {
+    background-image: url('../multimedia/ot/8.png');
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-banner h1 {
+    font-size: 48px;
+    color: white;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Títulos e información */
+.contact-number {
+    font-size: 18px;
+    color: #333;
+}
+
+.contact-title {
+    font-size: 24px;
+    color: #8BC34A;
+    font-weight: bold;
+}
+
+.contact-subtitle {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Formulario */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.btn-send {
+    background-color: #8BC34A;
+    color: white;
+    padding: 10px 40px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-send:hover {
+    background-color: #76a82a;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contact-banner h1 {
+        font-size: 32px;
+    }
+
+    .btn-send {
+        width: 100%;
+    }
+}

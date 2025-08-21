@@ -1,0 +1,25 @@
+[29-Jan-2025 00:55:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 28
+[29-Jan-2025 00:55:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 28
+[29-Jan-2025 00:55:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 28
+[29-Jan-2025 00:55:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 28
+[29-Jan-2025 00:58:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 28
+[28-Jan-2025 19:04:43 America/Mexico_City] PHP Warning:  Undefined variable $host in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/db/connection.php on line 72
+[28-Jan-2025 19:04:43 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::bind_param() in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/n3j51z7x8xqp/public_html/zoilife.com.mx/back/auth/process_login.php on line 26

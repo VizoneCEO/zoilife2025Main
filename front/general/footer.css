@@ -1,0 +1,117 @@
+/* Footer General */
+.footer {
+    background-color: #8BC34A;
+    color: #fff;
+    padding: 40px 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Logo */
+.footer-logo {
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+/* Títulos */
+.footer h5 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer h6 {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Texto */
+.footer p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Íconos de pago */
+.payment-icons img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+/* Formulario de suscripción */
+.subscribe-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.subscribe-form input::placeholder {
+    color: #fff;
+    font-size: 14px;
+}
+
+.subscribe-form button {
+    background-color: #fff;
+    color: #8BC34A;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.subscribe-form button:hover {
+    background-color: #f1f1f1;
+}
+
+/* Enlaces */
+.footer-links a {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Derechos de autor */
+.copyright {
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+
+    .payment-icons img {
+        width: 30px;
+        margin-bottom: 10px;
+    }
+
+    .subscribe-form input, .subscribe-form button {
+        width: 100%;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links div {
+        margin-bottom: 20px;
+    }
+}

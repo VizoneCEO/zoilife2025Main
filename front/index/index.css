@@ -1,0 +1,741 @@
+/* Sección Hero */
+.hero-section {
+    position: relative;
+    height: 85vh;
+    overflow: hidden;
+}
+
+/* Video de fondo */
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Capa oscura para contraste */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Contenido centrado */
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Texto de promoción */
+.promo-title {
+    font-size: 60px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.promo-subtitle {
+    font-size: 40px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Iconos de beneficios */
+.benefits-icons img {
+    width: 50px;
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4));
+}
+
+/* Botón de compra */
+.btn-buy {
+    background-color: #8BC34A;
+    color: white;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.btn-buy:hover {
+    background-color: #76a82a;
+    transform: scale(1.1);
+}
+
+/* Imagen del producto */
+.product-image {
+    width: 400px;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 992px) {
+    .promo-title {
+        font-size: 40px;
+    }
+
+    .promo-subtitle {
+        font-size: 28px;
+    }
+
+    .benefits-icons img {
+        width: 40px;
+    }
+
+    .product-image {
+        width: 300px;
+    }
+
+    .hero-section {
+        height: auto;
+        padding: 30px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .promo-title {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .promo-subtitle {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .btn-buy {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .benefits-icons {
+        flex-wrap: wrap;
+    }
+
+    .product-image {
+        width: 250px;
+        margin-top: 20px;
+    }
+}
+
+
+/* Sección de Productos */
+.product-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.view-all {
+    font-size: 14px;
+    color: #4CAF50;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+/* Tarjeta de Producto */
+.product-card {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-status {
+    font-size: 12px;
+    color: #8BC34A;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Calificación */
+.rating i {
+    color: #FFD700;
+    font-size: 14px;
+}
+
+.reviews {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+/* Precio */
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+/* Botón de compra */
+.btn-buy {
+    display: inline-block;
+    background-color: #8BC34A;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buy:hover {
+    background-color: #76a82a;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 992px) {
+    .product-card {
+        padding: 15px;
+    }
+
+    .product-img {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 20px;
+    }
+
+    .product-name {
+        font-size: 14px;
+    }
+
+    .btn-buy {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+
+
+
+
+/* Imagen de fondo */
+.background-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7); /* Oscurece un poco la imagen para contraste */
+}
+
+/* Contenido centrado */
+.inspiration-content {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+}
+
+/* Título */
+.inspiration-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+/* Subtítulo */
+.inspiration-content p {
+    font-size: 1.2rem;
+    font-weight: lighter;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+    .inspiration-section {
+        height: 50vh;
+    }
+
+    .inspiration-content h1 {
+        font-size: 2rem;
+    }
+
+    .inspiration-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .inspiration-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .inspiration-content p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* Sección de Valores */
+.values-section {
+    padding: 50px 0;
+}
+
+/* Bloque de imagen */
+.image-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.image-box:hover img {
+    transform: scale(1.1);
+}
+
+/* Texto sobre la imagen */
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.overlay-text span {
+    color: #8BC34A;
+}
+
+/* Títulos */
+.value-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8BC34A;
+}
+
+/* Texto */
+.value-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Botón */
+.btn-philosophy {
+    background-color: #8BC34A;
+    color: white;
+    padding: 12px 30px;
+    font-size: 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-philosophy:hover {
+    background-color: #76a82a;
+    transform: scale(1.05);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+    .overlay-text {
+        font-size: 18px;
+    }
+
+    .value-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .value-text {
+        text-align: center;
+    }
+
+    .btn-philosophy {
+        width: 80%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Imagen de fondo cubriendo todo el ancho */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../multimedia/comunidad2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.8);
+    z-index: -1;
+}
+
+/* Logo superior izquierdo */
+.logo-corner {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo-corner img {
+    width: 70px;
+}
+
+/* Contenido alineado y centrado */
+.wellness-content {
+    text-align: left;
+    max-width: 600px;
+}
+
+.wellness-content h1 {
+    font-size: 3rem;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.2;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.wellness-content h1 span {
+    color: #2E7D32; /* Verde oscuro */
+}
+
+/* Botón con mejor alineación */
+.btn-recommendations {
+    background-color: #8BC34A;
+    color: white;
+    padding: 12px 40px;
+    font-size: 16px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-recommendations:hover {
+    background-color: #76a82a;
+    transform: scale(1.05);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+    .wellness-section {
+        height: 60vh;
+    }
+
+    .wellness-content h1 {
+        font-size: 2rem;
+    }
+
+    .btn-recommendations {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+
+    .logo-corner img {
+        width: 50px;
+    }
+}
+
+
+
+/* Sección de Productos Nuevos */
+.new-products-section {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+/* Título de la sección */
+.new-products-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.new-products-section h2 span {
+    color: #8BC34A;
+}
+
+/* Tarjeta de producto */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del producto */
+.product-img {
+    width: auto;
+    height: 110px;
+    object-fit: contain;
+
+    margin-bottom: 10px;
+}
+
+/* Etiqueta "Nuevo" */
+.new-tag {
+    color: #FF9800;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Título del producto */
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Estrellas */
+.stars i {
+    color: #8BC34A;
+    font-size: 16px;
+}
+
+/* Reseñas */
+.reviews {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Precio */
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Botón de compra */
+.btn-buy {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px 25px;
+    font-size: 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buy:hover {
+    background-color: #e68900;
+}
+
+/* Botón de ir a la tienda */
+.btn-store {
+    background-color: #8BC34A;
+    color: white;
+    padding: 12px 40px;
+    font-size: 14px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-store:hover {
+    background-color: #76a82a;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .product-card {
+        margin-bottom: 20px;
+    }
+
+    .btn-store {
+        width: 80%;
+    }
+}
+
+
+
+/* Sección de Testimonios */
+.testimonials-section {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+/* Título de la sección */
+.testimonials-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.testimonials-section h2 span {
+    color: #8BC34A;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta de Testimonio */
+.testimonial-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Foto del cliente */
+.client-photo {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+/* Nombre del cliente */
+.client-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+/* Rol del cliente */
+.client-role {
+    color: #8BC34A;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estrellas */
+.stars i {
+    color: #8BC34A;
+    font-size: 16px;
+}
+
+/* Texto del testimonio */
+.testimonial-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .testimonial-card {
+        margin-bottom: 20px;
+    }
+
+    .client-photo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .client-name {
+        font-size: 16px;
+    }
+
+    .testimonial-text {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+
+
+
