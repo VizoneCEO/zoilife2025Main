@@ -1,302 +1,125 @@
-<style>
-    /* Contenedor principal */
-    .product-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-    }
-
-    /* Imagen del producto */
-    .product-image {
-        width: 45%;
-        text-align: center;
-    }
-
-    .product-image img {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .product-thumbnails {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .product-thumbnails img {
-        width: 80px;
-        height: auto;
-        cursor: pointer;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .product-thumbnails img:hover {
-        border-color: #8BC34A;
-    }
-
-    /* Información del producto */
-    .product-info {
-        width: 50%;
-    }
-
-    .product-info h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .product-price {
-        font-size: 28px;
-        font-weight: bold;
-        margin: 10px 0;
-    }
-
-    .product-rating {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #8BC34A;
-    }
-
-    .product-rating i {
-        font-size: 18px;
-    }
-
-    /* Controles de cantidad */
-    .product-quantity {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin: 15px 0;
-    }
-
-    .quantity-box {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 5px 10px;
-    }
-
-    .quantity-box button {
-        background: none;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        color: #555;
-    }
-
-    .quantity-box input {
-        width: 30px;
-        text-align: center;
-        border: none;
-        font-size: 16px;
-        outline: none;
-    }
-
-    /* Botón de comprar */
-    .buy-button {
-        display: block;
-        width: 100%;
-        background-color: #8BC34A;
-        color: white;
-        padding: 12px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-
-    .buy-button:hover {
-        background-color: #7CB342;
-    }
-
-    /* Descripción */
-    .product-description {
-        margin-top: 20px;
-        font-size: 14px;
-        line-height: 1.5;
-
-    }
-
-    /* Tabla de información */
-    .product-info-table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-    }
-
-    .product-info-table th,
-    .product-info-table td {
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .product-info-table th {
-        font-weight: bold;
-        background-color: #f9f9f9;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .product-container {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .product-image,
-        .product-info {
-            width: 100%;
-            text-align: center;
-        }
-
-        .product-thumbnails {
-            justify-content: center;
-        }
-
-        .product-info h1 {
-            font-size: 22px;
-        }
-
-        .buy-button {
-            font-size: 14px;
-        }
-    }
-
-</style>
 <?php
 include '../../back/db/connection.php';
 
-$id = $_GET['id'] ?? null;
+// Validar que el ID del producto (id_receta) es un número entero
+$id_receta = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if (!$id) {
-    echo "Producto no encontrado.";
+if ($id_receta === 0) {
+    echo "<p class='container my-5'>Error: Producto no especificado.</p>";
     exit;
 }
 
-$stmt = $conn->prepare("
-    SELECT pw.*, r.nombre_producto 
-    FROM productos_web pw
-    JOIN recetas r ON pw.id_receta = r.id_receta
-    WHERE pw.id_producto_web = :id AND pw.estatus = 'activo'
-");
-$stmt->bindParam(':id', $id);
-$stmt->execute();
+// Consulta principal para obtener los detalles del producto
+$stmt = $conn->prepare(
+    "SELECT 
+        pw.id_receta, 
+        pw.foto_principal, 
+        pw.categoria, 
+        pw.precio, 
+        pw.descripcion, 
+        r.nombre_producto 
+     FROM productos_web pw
+     JOIN recetas r ON pw.id_receta = r.id_receta
+     WHERE pw.id_receta = ?"
+);
+$stmt->execute([$id_receta]);
 $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Si no se encuentra el producto, salir
 if (!$producto) {
-    echo "Producto no disponible.";
+    echo "<p class='container my-5'>Producto no encontrado.</p>";
     exit;
 }
 
-// Obtener fotos anexas
-$stmt_fotos = $conn->prepare("
-    SELECT url_foto FROM productos_web_fotos
-    WHERE id_producto_web = :id AND estatus = 'activo'
-    ORDER BY orden ASC
-");
-$stmt_fotos->bindParam(':id', $id);
-$stmt_fotos->execute();
-$fotos_anexas = $stmt_fotos->fetchAll(PDO::FETCH_ASSOC);
+// --- CÓDIGO PARA PRODUCTOS RELACIONADOS ---
+$productos_relacionados = [];
+if (!empty($producto['categoria'])) {
+    $categoria_actual = $producto['categoria'];
+
+    $stmt_relacionados = $conn->prepare(
+        "SELECT 
+            pw.id_receta, 
+            r.nombre_producto, 
+            pw.foto_principal, 
+            pw.precio 
+         FROM productos_web pw
+         JOIN recetas r ON pw.id_receta = r.id_receta
+         WHERE pw.categoria = ? AND pw.id_receta != ? AND pw.estatus = 'activo'
+         ORDER BY RAND() 
+         LIMIT 4"
+    );
+    $stmt_relacionados->execute([$categoria_actual, $id_receta]);
+    $productos_relacionados = $stmt_relacionados->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .product-card { border: 1px solid #e1e1e1; border-radius: 8px; transition: all 0.3s ease; overflow: hidden; text-align: center; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .product-card img { width: 100%; height: 200px; object-fit: cover; }
+    .product-card-body { padding: 15px; }
+    .product-card-title { font-size: 1rem; font-weight: 600; height: 40px; }
+    .product-card-price { font-size: 1.2rem; font-weight: 700; color: #28a745; }
+    .product-card .btn { width: 100%; }
+</style>
 
-
-<!-- Contenedor del producto -->
-<div class="product-container">
-    <!-- Imagen principal del producto -->
-    <div class="product-image">
-        <img id="main-product-image" src="../productosWeb/<?= $producto['foto_principal'] ?>" alt="<?= $producto['nombre_producto'] ?>">
-
-        <div class="product-thumbnails">
-            <!-- Agregamos la imagen principal como primer miniatura -->
-            <img src="../productosWeb/<?= $producto['foto_principal'] ?>" alt="Vista principal" onclick="cambiarImagen(this)">
-
-            <?php foreach ($fotos_anexas as $foto): ?>
-                <img src="../productosWeb/<?= $foto['url_foto'] ?>" alt="Vista extra" onclick="cambiarImagen(this)">
-            <?php endforeach; ?>
-
-
-        </div>
-    </div>
-
-    <!-- Información del producto -->
-    <div class="product-info">
-        <span class="product-new">Nuevo</span>
-        <h1><?= $producto['nombre_producto'] ?></h1>
-
-        <div class="product-rating">
-            <?php for ($i = 0; $i < $producto['estrellas']; $i++): ?>
-                <i class="bi bi-star-fill"></i>
-            <?php endfor; ?>
-            <span><?= $producto['estrellas'] ?> Estrellas</span>
-        </div>
-
-        <div class="product-price">$<?= number_format($producto['precio'], 2) ?></div>
-
-        <!-- Control de cantidad -->
-        <div class="product-quantity">
-            <label>Cantidad:</label>
-            <div class="quantity-box">
-                <button onclick="cambiarCantidad(-1)">-</button>
-                <input type="text" id="cantidad" value="1">
-                <button onclick="cambiarCantidad(1)">+</button>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <img id="main-product-image" src="../productosWeb/<?php echo htmlspecialchars($producto['foto_principal']); ?>" class="img-fluid rounded border" alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
             </div>
         </div>
 
-        <!-- Botón de compra -->
-        <form method="POST" action="agregar_al_carrito.php">
-            <input type="hidden" name="id_producto" value="<?= $producto['id_producto_web'] ?>">
-            <input type="hidden" name="cantidad" id="inputCantidad" value="1">
-            <button type="submit" class="buy-button">AGREGAR AL CARRITO</button>
-        </form>
+        <div class="col-md-6">
+            <h1 class="display-5"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h1>
+            <p class="text-muted">Categoría: <?php echo htmlspecialchars($producto['categoria']); ?></p>
+            <p class="h3 fw-bold text-success mb-4">$<?php echo number_format($producto['precio'], 2); ?></p>
 
+            <div class="mb-4">
+                <?php echo $producto['descripcion']; ?>
+            </div>
 
-        <!-- Descripción del producto -->
-        <div class="product-description">
-            <?= html_entity_decode($producto['descripcion']) ?>
+            <form action="agregar_al_carrito.php" method="post">
+                <input type="hidden" name="id_producto" value="<?php echo $producto['id_receta']; ?>">
+                <div class="d-flex align-items-center mb-3">
+                    <label for="cantidad" class="form-label me-3">Cantidad:</label>
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" value="1" min="1" style="width: 100px;">
+                </div>
+                <button type="submit" class="btn btn-success btn-lg w-100">
+                    <i class="fas fa-shopping-cart me-2"></i> Añadir al carrito
+                </button>
+            </form>
         </div>
-
-        <!-- Información del producto -->
-        <?php if (!empty($producto['contenido'])): ?>
-            <table class="product-info-table">
-                <tr>
-                    <th>INFORMACIÓN DEL PRODUCTO</th>
-                </tr>
-                <tr>
-                    <td colspan="2"><?= html_entity_decode($producto['contenido']) ?></td>
-                </tr>
-            </table>
-        <?php endif; ?>
     </div>
+
+    <?php if (!empty($productos_relacionados)): ?>
+        <hr class="my-5">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2 class="text-center mb-4">Productos Relacionados</h2>
+            </div>
+
+            <?php foreach ($productos_relacionados as $relacionado): ?>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card product-card h-100">
+                        <a href="detalleProducto.php?id=<?php echo $relacionado['id_receta']; ?>">
+                            <img src="../productosWeb/<?php echo htmlspecialchars($relacionado['foto_principal']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($relacionado['nombre_producto']); ?>">
+                        </a>
+                        <div class="card-body product-card-body d-flex flex-column">
+                            <h5 class="card-title product-card-title">
+                                <a href="detalleProducto.php?id=<?php echo $relacionado['id_receta']; ?>" class="text-dark text-decoration-none">
+                                    <?php echo htmlspecialchars($relacionado['nombre_producto']); ?>
+                                </a>
+                            </h5>
+                            <p class="card-text product-card-price mt-auto">$<?php echo number_format($relacionado['precio'], 2); ?></p>
+                            <a href="detalleProducto.php?id=<?php echo $relacionado['id_receta']; ?>" class="btn btn-outline-success mt-2">Ver Producto</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+    <?php endif; ?>
 </div>
-
-<script>
-    function cambiarCantidad(cambio) {
-        const input = document.getElementById('cantidad');
-        const hidden = document.getElementById('inputCantidad');
-        let valor = parseInt(input.value);
-        valor = isNaN(valor) ? 1 : valor + cambio;
-        if (valor < 1) valor = 1;
-        input.value = valor;
-        hidden.value = valor; // Actualiza también el input hidden
-    }
-
-</script>
-
-<script>
-    function cambiarImagen(imagen) {
-        const principal = document.getElementById('main-product-image');
-        principal.src = imagen.src;
-    }
-</script>
-
