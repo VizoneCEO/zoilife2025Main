@@ -96,7 +96,7 @@
         <div class="row">
             <!-- Información de la empresa -->
             <div class="col-md-4">
-                <img src="front/multimedia/logo3.png" alt="Zoilife Logo" class="" width="50%">
+                <img src="front/multimedia/logoc.svg" alt="Zoilife Logo" class="" width="50%">
                 <h5>ZOI LIFE® <br>PRODUCTOS POLITÉCNICOS</h5>
                 <p>
                     Tu salud no es un lujo, es la base de tu vida. En Zoi Life, creemos en la capacidad del
@@ -147,7 +147,8 @@
 
                     <div>
                         <h6>INFO</h6>
-                        <a href="#" onclick="openModal('modalCofepris')">Certificado COFEPRIS</a><br>
+                        <!--<a href="#" onclick="openModal('modalCofepris')">Certificado COFEPRIS</a><br>-->
+                        <a href="#" ">Certificado COFEPRIS</a><br>
                         <a href="#">Contacto</a><br>
                         <a href="#">Preguntas Frecuentes</a><br>
                         <a href="#">Políticas de Privacidad</a><br>

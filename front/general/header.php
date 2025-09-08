@@ -19,7 +19,7 @@ $total_items = array_sum($_SESSION['carrito'] ?? []);
 <header class="main-header">
     <!-- Logo -->
     <a class="logo" href="index.php">
-        <img src="front/multimedia/logo.png" alt="Zoilife Logo">
+        <img src="front/multimedia/logob.svg" alt="Zoilife Logo">
     </a>
 
     <!-- Barra de búsqueda -->
@@ -106,7 +106,7 @@ $total_items = array_sum($_SESSION['carrito'] ?? []);
 
 <!-- Botón flotante de WhatsApp -->
 
-<a href="https://wa.me/525554749094" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/524461140383" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
