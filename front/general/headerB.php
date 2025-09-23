@@ -18,9 +18,11 @@ $total_items = array_sum($_SESSION['carrito'] ?? []);
 <!-- Header Principal -->
 <header class="main-header">
     <!-- Logo -->
+
     <a class="logo" href="../../index.php">
-        <img src="../multimedia/logo.png" alt="Zoilife Logo">
+        <img src="../multimedia/logod.jpeg" alt="Zoilife Logo">
     </a>
+
 
     <!-- Barra de búsqueda -->
     <div class="search-container position-relative" style="margin-top: 10px;">

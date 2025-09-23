@@ -272,7 +272,7 @@
 
             <!-- Lado derecho: Imagen del producto -->
             <div class="col-lg-6 text-center">
-                <img src="front/multimedia/cellGroup.png" alt="Célula Master" class="product-image">
+                <img src="front/multimedia/Slide1.png" alt="Célula Master" class="product-image">
             </div>
         </div>
     </div>
@@ -320,7 +320,7 @@
 
                         foreach ($grupo as $item) {
                             echo '
-                <div class="col-12 col-md-4 mb-4">
+                <div class="col-4 col-md-4 mb-4">
 <div class="text-center p-3 bg-white rounded" style="box-shadow: none; border: none;">
                         <img src="front/productosWeb/' . $item['foto_principal'] . '" class="img-fluid mb-2" style="max-height: 200px; object-fit: contain;">
                         <h5 class="product-name">' . $item['nombre_producto'] . '</h5>
