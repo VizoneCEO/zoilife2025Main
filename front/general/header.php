@@ -1,7 +1,52 @@
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1484493516050229');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1484493516050229&ev=PageView&noscript=1"
+/></noscript>
+
 <?php
 session_start();
 $total_items = array_sum($_SESSION['carrito'] ?? []);
+
+
+
+
 ?>
+
+<?php
+        // --- INICIO CÓDIGO PARA EVENTO AddToCart ---
+        if (isset($_SESSION['meta_event_addtocart'])) {
+            $eventData = $_SESSION['meta_event_addtocart'];
+        ?>
+        <script>
+            // Disparamos el evento AddToCart con los datos que guardamos en la sesión
+            fbq('track', 'AddToCart', {
+                content_ids: ['<?php echo $eventData['id']; ?>'],
+                content_name: '<?php echo addslashes($eventData['name']); ?>', // addslashes por si el nombre tiene comillas
+                value: <?php echo $eventData['price']; ?>,
+                currency: 'MXN'
+            });
+        </script>
+        <?php
+            // MUY IMPORTANTE: Borramos la variable de sesión para que no se dispare de nuevo
+            unset($_SESSION['meta_event_addtocart']);
+        }
+        // --- FIN CÓDIGO PARA EVENTO AddToCart ---
+        ?>
+
+
+
+
 
 
 <!-- front/general/header.php -->

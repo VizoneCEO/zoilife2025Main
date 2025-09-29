@@ -71,5 +71,12 @@ try {
         </div>
     </div>
 </div>
+
+<script>
+  fbq('track', 'Purchase', {
+    value: <?php echo $pedido; ?>,
+    currency: 'MXN'
+  });
+</script>
 </body>
 </html>

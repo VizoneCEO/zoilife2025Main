@@ -27,6 +27,11 @@ foreach ($productos as $p) {
 }
 ?>
 
+<script>
+  fbq('track', 'InitiateCheckout');
+</script>
+
+
 <div class="container mt-5 mb-5">
     <h2 class="mb-4">Finaliza tu compra</h2>
 
